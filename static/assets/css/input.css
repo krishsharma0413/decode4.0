@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+npx tailwindcss build static/assets/css/input.css -o static/assets/css/output.css --watch
+*/
+
+@font-face {
+    font-family: "Nulshock";
+    src: url("/static/assets/fonts/nulshock-bd.otf");
+}
+
+@font-face {
+    font-family: 'dos';
+    src: url("/static/assets/fonts/Perfect.ttf");
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url("/static/assets/fonts/Poppins-Bold.ttf");
+}
+
+.hero{
+    background-image: url("/static/assets/images/herobg.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.experiment-heading{
+    @apply text-text font-nulshock font-bold text-center text-3xl md:text-5xl;
+}
+
+.experiment-cards{
+    cursor: pointer !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 200px;
+    @apply my-4 w-full p-4 flex justify-center place-items-center;
+}
+
+.experiment-name{
+    @apply text-text font-nulshock font-bold text-center text-base md:text-2xl;
+}
+
+.experiment-box{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image{
+    @apply absolute;
+    /* put it in middle  */
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
