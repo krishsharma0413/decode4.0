@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'components/head.html' %}
+</head>
+
+<body class="bg-background">
+
+    {% include 'components/navbar.html' %}
+    <!-- announcement dialog box -->
+    <div id="announcement" style="z-index: 100;"
+        class="flex hidden absolute top-0 left-0 w-screen h-screen overflow-hidden justify-center place-items-center">
+        <div class="w-[95%] text-center justify-center relative md:w-[80%] h-[80vh] rounded-3xl bg-primary">
+            <h1 class="font-dos text-center font-bold text-3xl md:text-6xl my-4">
+                ANNOUNCEMENT
+            </h1>
+            <button class="font-dos z-30 absolute top-4 right-4 text-xl md:text-5xl text-background">X</button>
+            <div class="w-full flex justify-center">
+                <div class="w-[90%] h-[65vh] overflow-y-scroll">
+                    {{announcements | safe}}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="flex relative justify-center place-items-center w-full h-[95vh] hero">
+        <div>
+            <h1
+                class="font-dos text-text leading-[55px] text-[80px] md:leading-[110px] md:text-[180px] lg:leading-[170px] lg:text-[280px]">
+                Decode.</h1>
+            <p class="text-text font-nulshock leading-none  text-[10px] md:text-[25px] lg:text-[30px]">WILL YOU SURVIVE
+                THE NIGHT?</p>
+            <a href="/socials/discord" class="bg-text text-background font-dos md:font-bold
+            lg:text-2xl lg:mt-2 lg:px-2 lg:py-1
+            text-base mt-1 px-2 py-1
+
+            ">join discord</a>
+        </div>
+
+        <button onclick="openAnnouncement();"><img class="absolute z-50 hov bottom-0 right-0 m-5"
+                src="/static/assets/images/announcement.svg"></button>
+    </section>
+
+    <section class="flex w-full min-h-[50vh] justify-center my-[50px]" id="rules">
+        <div class="w-[95%]">
+            <h1 class="font-dos text-4xl md:text-6xl text-text">
+                Rules.
+            </h1>
+            <div class="w-full p-4 py-[30px] text-lg font-bold tracking-wide md:text-3xl bg-primary font-nulshock">
+                <p class="leading-none py-[2px]">1. Google is your best friend.</p>
+                <p class="leading-none py-[2px]">2. cross-teaming is not allowed.</p>
+                <p class="leading-none py-[2px]">3. play fair, no cheating and hacking is allowed.</p>
+                <p class="leading-none py-[2px]">4. on ban, organizer's decision is final.</p>
+                <p class="leading-none py-[2px]">5. respect privacy, no doxxing.</p>
+                <p class="leading-none py-[2px]">6. no external help is allowed.</p>
+                <p class="leading-none py-[2px]">7. no spoliers of level ?????</p>
+                <p class="leading-none py-[2px]">8. De gustibus non est disputandum.</p>
+            </div>
+        </div>
+    </section>
+x
+
+    {% include 'components/footer.html' %}
+
+    <script>
+        // check class hover and change src of that class image
+        const img = document.querySelector('.hov');
+        img.addEventListener('mouseover', () => {
+            img.src = '/static/assets/images/announcement-hover.svg';
+        });
+
+        img.addEventListener('mouseout', () => {
+            img.src = '/static/assets/images/announcement.svg';
+        });
+
+        // announcement dialog box
+        const announcement = document.getElementById('announcement');
+        const close = document.querySelector('#announcement button');
+        close.addEventListener('click', () => {
+            announcement.classList.add('hidden');
+        });
+
+        function openAnnouncement() {
+            announcement.classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'components/head.html' %}
+</head>
+
+<body class="bg-background">
+
+    {% include 'components/navbar.html' %}
+
+    {% if userData['2-1']['status'] == True and userData['2-2']['status'] == False %}
+        <!-- 387sdafhasu9as.png -->
+    {% endif %}
+
+    <!-- smoothness dialog box -->
+
+    {% for x in experiments %}
+    <div id="experiment-box-{{x}}"
+        class="flex fixed hidden z-40 top-0 left-0 w-screen h-screen overflow-hidden justify-center place-items-center">
+        <div class="w-[95%] text-center place-items-center justify-center relative md:w-[80%] rounded-3xl bg-primary">
+            <h1 class="font-dos text-center font-bold text-3xl md:text-6xl my-4">
+                EXPERIMENT - {{x}}
+            </h1>
+
+            <button onclick="RemoveExp('experiment-box-{{x}}');"
+                class="font-dos absolute top-4 right-4 text-xl md:text-5xl text-background">X</button>
+
+            <div class="w-full flex justify-center">
+                <div class="w-[90%] py-8">
+                    <h1 class="text-left font-nulshock text-xl md:text-2xl">
+                        Progress: {{ [userData[x ~ "-0"]["status"], userData[x ~ "-1"]["status"], userData[x ~
+                        "-2"]["status"]]|select('equalto', true)|list|length }}/3
+                    </h1>
+
+                    <div onclick="linkOpener('/level/{{x}}/0');"
+                        class="w-full my-4 flex justify-center place-items-center py-4 bg-easy-bg text-text text-4xl md:text-9xl font-dos">
+                        EASY
+                    </div>
+
+                    {% if userData[x ~ "-0"]["status"] == True %}
+
+                        <div onclick="linkOpener('/level/{{x}}/1');"
+                            class="w-full my-4 flex justify-center place-items-baseline py-4 bg-medium-bg text-text text-4xl md:text-9xl font-dos">
+                            MEDIUM
+                        </div>
+                    {% else %}
+
+                        <div
+                            class="w-full my-4 flex justify-center place-items-baseline py-4 bg-medium-bg text-text text-4xl md:text-9xl font-dos">
+                            <img class="h-[20px] px-2 md:h-[80px]" src="/static/assets/images/lock.svg">MEDIUM
+                        </div>
+                        
+                    {% endif %}
+
+                    {% if userData[x ~ "-1"]["status"] == True %}
+
+                        <div onclick="linkOpener('/level/{{x}}/2');"
+                            class="w-full my-4 flex justify-center place-items-center py-4 bg-hard-bg text-text text-4xl md:text-9xl font-dos">
+                            HARD
+                        </div>
+
+                    {% else %}
+
+                        <div
+                            class="w-full my-4 flex justify-center place-items-center py-4 bg-hard-bg text-text text-4xl md:text-9xl font-dos">
+                            <img class="h-[20px] px-2 md:h-[80px]" src="/static/assets/images/lock.svg">
+                            HARD
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+    <div class="p-4 md:p-8 min-h-[100vh]">
+        <h1 class="mt-5 text-text font-dos font-bold w-full text-2xl md:text-5xl">Choose Your Experiment.</h1>
+        <div class="font-nulshock w-full">
+
+            {% for x in experiments %}
+
+            {% if x == 0 %}
+                <div onclick="AddExp('experiment-box-{{x}}');" id="experiment-card-holder" class="w-full">
+                    <div class="experiment-cards relative"
+                        style="background-image: url('/static/assets/images/experiments/{{x}}.webp');">
+                        <div class="absolute w-full h-full flex top-0 left-0 -z-0"
+                            style="background-color: rgba(0, 0, 0, 0.7);"></div>
+                        <div class="relative z-20">
+                            <h1 class="experiment-heading">DAY - {{x}}</h1>
+                            <h1 class="experiment-name">{{experiments[x]}}</h1>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+
+            {% set x_minus_one = x - 1 %}
+            {% if userData[x_minus_one ~ "-0"]["status"] == True %}
+            <div onclick="AddExp('experiment-box-{{x}}');" id="experiment-card-holder" class="w-full">
+                <div class="experiment-cards relative"
+                    style="background-image: url('/static/assets/images/experiments/{{x}}.webp');">
+                    <div class="absolute w-full h-full flex top-0 left-0 -z-0"
+                        style="background-color: rgba(0, 0, 0, 0.7);"></div>
+                    <div class="relative z-20">
+                        <h1 class="experiment-heading">EXPERIMENT - {{x}}</h1>
+                        <h1 class="experiment-name">{{experiments[x]}}</h1>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {% endfor %}
+
+            {% if length>=33 %}
+                <div onclick="linkOpener('/level/escape-day');" id="experiment-card-holder" class="w-full">
+                    <div class="experiment-cards relative"
+                        style="background-image: url('/static/assets/images/experiments/0.webp');">
+                        <div class="absolute w-full h-full flex top-0 left-0 -z-0"
+                            style="background-color: rgba(0, 0, 0, 0.7);"></div>
+                        <div class="relative z-20">
+                            <h1 class="experiment-heading">DAY - 11</h1>
+                            <h1 class="experiment-name">ESCAPE DAY</h1>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+    {% include 'components/footer.html' %}
+
+    <script>
+        function AddExp(cls) {
+            document.getElementById(cls).classList.remove('hidden');
+        }
+
+        function RemoveExp(cls) {
+            document.getElementById(cls).classList.add('hidden');
+        }
+
+
+        function linkOpener(link) {
+            window.location.href = link;
+        }
+    </script>
+
+</body>
+
+</html>

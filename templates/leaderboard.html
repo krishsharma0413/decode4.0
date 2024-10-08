@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'components/head.html' %}
+</head>
+
+<body class="bg-background">
+    
+    {% include 'components/navbar.html' %}
+
+    {% if user['2-1']['status'] == True and user['2-2']['status'] == False %}
+        <!-- 2sa876dgas.png -->
+    {% endif %}
+
+
+    <section class="flex relative justify-center mb-[50px] w-full min-h-[95vh] hero">
+        <div class="w-[95%] md:w-[70%] lg:w-[80%] relative my-[100px]">
+            <div class="text-center rounded-[30px] min-h-[70vh] bg-text p-4 md:p-8">
+
+                <h1 class="text-left text-background font-nulshock text-2xl md:text-4xl">
+                    leaderboard
+                </h1>
+
+
+                <div class="flex w-full justify-center mb-[20px] mt-2">
+                    <div class="w-full md:w-[100%] overflow-x-scroll">
+                        <table class="w-full border-2 border-background">
+                            <tr>
+                                <th class="border-2 text-easy-bg bg-background text-left px-2 font-nulshock border-hard-bg">POSITION</th>
+                                <th class="border-2 text-easy-bg bg-background text-left px-2 font-nulshock border-hard-bg">USERNAME</th>
+                                <th class="border-2 text-easy-bg bg-background text-left px-2 font-nulshock border-hard-bg">POINTS</th>
+                            </tr>
+                            {{leaderboard_content | safe}}
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <p class="text-center font-dos text-text text-xl font-bold">Not sure what happened? Join our <a class="text-[#888888]" href="/links/discord">discord!</a></p>
+        </div>
+
+    </section>
+
+    {% include 'components/footer.html' %}
+
+</body>
+
+</html>

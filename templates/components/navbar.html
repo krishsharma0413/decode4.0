@@ -1,0 +1,49 @@
+{% if not authenticated %}
+<nav class="flex bg-text w-full h-[50px] justify-between place-items-center px-4">
+    <!-- logo -->
+    <div class="font-poppins text-4xl font-bold"><a href="/">Decode.</a></div>
+
+    <!-- authentication -->
+    <div>
+        <a href="/login" class="text-text font-poppins bg-background px-4 py-2 rounded-lg"> >Login</a>
+    </div>
+
+</nav>
+{% endif %}
+
+{% if authenticated %}
+<nav class="flex bg-text w-full h-[50px] justify-between place-items-center px-4">
+    <!-- logo -->
+    <div class="font-poppins text-4xl font-bold"><a href="/">Decode.</a></div>
+    <!-- main nav -->
+    <div class="text-center hidden md:block">
+        <a href="/menu" class="text-background font-nulshock px-4 text-xl py-2">PLAY</a>
+
+        {% if request.url.path != '/leaderboard' %}
+        <a href="/leaderboard" class="text-background font-nulshock text-xl  px-4 py-2">LEADERBOARD</a>
+        {% endif %}
+    </div>
+
+    <div class="relative">
+        <div id="navsection" class="absolute navsec z-50 hidden text-right border-[1px] border-easy-bg bottom-[-78px] right-0 px-4 rounded-md bg-text text-background font-nulshock">
+            {% if (not request.url.path.startswith('/level')) %}
+            <a href="/menu">PLAY</a>
+            <hr>
+            {% endif %}
+            <a href="/users/@me">PROFILE</a>
+            {% if request.url.path != '/leaderboard' %}
+            <hr>
+            <a href="/leaderboard">LEADERBOARD</a>
+            {% endif %}
+        </div>
+        <a href="javascript:toggleNav();" class="block md:hidden rounded-lg">
+            <img class="w-[45px] border-2 border-background rounded-full" src="/static/assets/avatars/{{avatar_img}}.png">
+        </a>
+
+        <a href="/users/@me" class="hidden md:block rounded-lg">
+            <img class="w-[45px] border-2 border-background rounded-full" src="/static/assets/avatars/{{avatar_img}}.png">
+        </a>
+    </div>
+</nav>
+
+{% endif %}
